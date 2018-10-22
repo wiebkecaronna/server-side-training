@@ -5,11 +5,13 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from images.forms import SignUpForm
+from images.forms import LoginForm
 
 
 def index(request):
     """Return the logged in page, or the logged out page
     """
+    print('Index view!')
     if request.user.is_authenticated():
         return render(request, 'images/index-logged-in.html', {
             'user': request.user
@@ -19,7 +21,7 @@ def index(request):
 
 
 def signup(request):
-    """Sign up the user
+    """Render the Signup form or a process a signup
     """
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -39,10 +41,23 @@ def signup(request):
 
 
 def login(request):
-    """Login the user
+    """Render the login form or log in the user
     """
-    log_in(request)
-    return HttpResponseRedirect('/')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            log_in(request, user)
+            return HttpResponseRedirect('/')
+        else:
+            return render(request, 'images/login.html', {
+                'form': LoginForm,
+                'error': 'Please try again'
+            })
+    else:
+        return render(request, 'images/login.html', {'form': LoginForm})
+
 
 
 def logout(request):
