@@ -19,12 +19,14 @@
 - Run `pipenv shell` to activate the Python environment
 
 ### Run the local server!
-- Run `python manage.py runserver` in the directory with the "manage.py" file
+- In the directory with the "manage.py" file:
+  - Run `python manage.py migrate` (this sets up the database tables)
+  - Then, run `python manage.py runserver`
 - Go to your web browser and type in localhost:8000. You should see the local web app!
 - You can stop the server with ctrl-c
 
 
-## Mixpanel Practice
+## Mixpanel Practice (Practical)
 - Initialize / insert Mixpanel into the sample app (make sure you have downloaded this app and that it runs)
 - Track events with event properties client-side (follow the chart below, and add any other event and event properties as you deem necessary. Do not use Autotrack)
 - Track events with event properties server-side (follow the chart below, and add any other event and event properties as you deem necessary)
