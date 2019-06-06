@@ -6,5 +6,22 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button class="btn btn-success" type="submit">Sign up</button>
+
+        <input type="hidden" name="mp_distinct_id" value="" id="mp_distinct_id">
     </form>
+
+    <script>
+		function saveDistinctID(){
+			if(mp_distinct_id!=""){
+				console.log('id assigned');
+				document.getElementById('mp_distinct_id').value = mp_distinct_id;
+			}else{
+				console.log('waiting');
+				window.setTimeout(saveDistinctID, 500);
+			}
+		}
+
+		saveDistinctID();
+</script>
 {% endblock %}
+

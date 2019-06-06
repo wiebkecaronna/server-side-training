@@ -26,5 +26,15 @@ function getCorgi() {
     ];
     var randomNumber = Math.floor((Math.random() * corgis.length));
     var chosenCorgi = corgis[randomNumber];
+    //get page name
+    var page = window.location.href;
+
     document.getElementById("corgi_image").src = chosenCorgi;
+    mixpanel.track(
+        "New Corgi Loaded", 
+        {"Corgi": chosenCorgi,
+         "Page": page});
+    mixpanel.people.increment("Number of Corgis");
+    mixpanel.people.set({ "Plan": "Premium" });
 }
+
